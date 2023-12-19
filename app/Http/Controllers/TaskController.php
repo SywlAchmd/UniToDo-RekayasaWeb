@@ -24,7 +24,7 @@ class TaskController extends Controller
 
         Task::create($validatedData);
 
-        return redirect()->back()->with('success', 'Task created successfully.');
+        return redirect()->route('task.index');
     }
 
     public function update(Request $request, Task $task) {
@@ -38,14 +38,12 @@ class TaskController extends Controller
 
         $task->update($validatedData);
 
-        // return redirect()->back()->with('success', 'Task updated successfully.');
         return redirect()->route('task.index');
     }
 
     public function destroy(Task $task) {
         $task->delete();
 
-        // return redirect()->back()->with('success', 'Task deleted successfully.');
         return redirect()->route('task.index');
     }
 }

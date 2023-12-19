@@ -2,7 +2,7 @@
     <div class="mx-10 mt-10">
         <h1 class="text-2xl font-bold mb-4">Task List</h1>
 
-        <div class="pb-4">
+        <div class="pb-4 flex justify-between">
             <button
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 @click="openModal('create')"
@@ -22,6 +22,7 @@
                     <th class="py-2 border-b">Actions</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr v-for="item in data" :key="item.id">
                     <td class="py-2 px-4 border-b max-w-[150px]">
@@ -30,10 +31,9 @@
                     <td class="py-2 px-4 border-b max-w-[200px] break-words">
                         {{ item.description }}
                     </td>
-                    <td class="py-2 px-4 border-b max-w-[100px] text-center">
+                    <td class="py-2 px-4 border-b w-[80px] text-center">
                         {{ formatDateTime(item.deadline) }}
                     </td>
-                    <!-- <td class="py-2 px-4 border-b max-w-[100px] text-center">{{ item.deadline }}</td> -->
                     <td class="py-2 px-4 border-b text-center">
                         {{ item.status }}
                     </td>
@@ -46,9 +46,9 @@
                         >
                             <button @click="openEditModal(item)">
                                 <img
-                                    width="28"
-                                    height="28"
-                                    src="https://img.icons8.com/pastel-glyph/64/create-new--v1.png"
+                                    width="32"
+                                    height="32"
+                                    src="../../../../public/edit.png"
                                     alt="create-new--v1"
                                 />
                             </button>
@@ -56,7 +56,7 @@
                                 <img
                                     width="32"
                                     height="32"
-                                    src="https://img.icons8.com/sf-regular-filled/48/trash.png"
+                                    src="../../../../public/trash.png"
                                     alt="trash"
                                 />
                             </button>
@@ -145,7 +145,14 @@
                         />
                     </div>
 
-                    <div class="flex justify-end">
+                    <div class="flex justify-end gap-2">
+                        <button
+                            class="bg-red-500 text-white font-bold py-2 px-4 rounded"
+                            @click="closeModal"
+                        >
+                            Cancel
+                        </button>
+
                         <button
                             type="submit"
                             class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
@@ -234,12 +241,21 @@
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Update Task
-                    </button>
+                    <div class="flex justify-end gap-2">
+                        <button
+                            class="bg-red-500 text-white font-bold py-2 px-4 rounded"
+                            @click="closeModal"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Update Task
+                        </button>
+                    </div>
                 </form>
             </div>
         </Modal>
@@ -304,7 +320,7 @@ const openModal = (type) => {
 };
 
 const closeModal = () => {
-    formData = initialValue;
+    formData = { ...initialValue };
     modalType.value = "";
     modalVisible.value = false;
 };
